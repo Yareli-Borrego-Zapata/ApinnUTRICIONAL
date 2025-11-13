@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Buscador Nutricional</h1>
+<form method="POST">
+    <div class="input-group mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Nombre del Alimento y Cantidad" required>
+        <button class="btn btn-primary" type="submit">Buscarrrrrr</button>
+    </div>
+</form>
+
+{% if result %}
+    <h3>Resultados:</h3>
+    <ul class="list-group">
+        {% for item in Resultados %}
+        <li class="list-group-item">
+            <strong>{{ item.nombr_comida }}</strong>: {{ item.nm_calorias }} calorías, {{ item.cantidad }} {{ item.unidad_medida }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
