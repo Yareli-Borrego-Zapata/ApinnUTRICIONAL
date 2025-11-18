@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
 <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10">
         <h1 class="mb-4 text-center">Buscador</h1>
-        <small><p class="mb-4 text-center">buscador de recetas facil y sencillo</p></small>
+        <strong><small><p class="mb-4 text-center">buscador de recetas facil y sencillo</p></small></strong>
+
+        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+    <div class="row g-0">
+    <div class="col-md-4">
+        <img src="static/imagen1.jpg.jpg" class="img-fluid rounded-start" alt=
+        "static/imagen1.jpg.jpg">
+    </div>
+    <div class="col-md-8">
+        <div class="card-body">
+        <h5 class="card-title">NutriFlow</h5>
+        <p class="card-text">
+            Estoy aprendiendo a usar las APIs 
+        </p>
+        </div>
+    </div>
+    </div>
+</div>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -18,15 +36,16 @@
         <form method="POST">
             <div class="input-group mb-5 shadow-sm">
                 <input type="text" name="search" class="form-control form-control-lg" placeholder="Nombre y Cantidad" required>
-                <button class="btn btn-primary btn-lg" type="submit">Buscarrrrrr</button>
+                <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
             </div>
         </form>
 
         {% if result %}
-            <h3 class="mt-4 border-bottom pb-2">Resultados;</h3>
+        <div class="card" style="width: 18rem;">
+            <h3 class="mt-4 border-bottom pb-2">Resultados:</h3>
             <ul class="list-group list-group-flush">
                 {% for item in result['foods'] %}
-                
+        
                     
                     <div class="d-flex align-items-center">
                         <img src="{{ item.photo.thumb }}" alt="foto" width="60" class="me-3 rounded-circle border p-1">
@@ -36,11 +55,12 @@
                         </div>
                     </div>
             
-        {{ item.nf_calories | round(1) }} kcal
-           
+        <strong>{{ item.nf_calories | round(1) }} kcal</strong>
+                    
             <li class="list-group-item py-1 text-muted bg-light">
             <small>Grasa: {{ item.nf_total_fat | round(1) }}g | Proteina {{ item.nf_protein | round(1) }}g | Carbos: {{ item.nf_total_carbohydrate | round(1) }}g</small>
                 </li>
+                    </div>
                 {% endfor %}
             </ul>
         {% endif %}
